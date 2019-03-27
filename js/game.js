@@ -15,37 +15,63 @@ enemy.src = "img/enemy.png";
 
 
 document.addEventListener("keydown",jump);
+document.addEventListener("keyup", down);
 
 function jump() {
-    yPos -=20;
+    yUp =185;
+    xUp +=15;
+
+} 
+function down(){
+    yUp +=25;
+    xUp +=10;
 }
 
-var enemy =[];
+ var enemys =[];
 
-enemy[0] = {
+enemys[0] = {
     x: cvs.width,
     y: 0
 }
+var xUp = 10;
+var yUp = 210;
 
-var xPos = 10;
-var yPos = 210;
-var grav = 0;
+
+var xPos = 150;
+var yPos = 204;
+var speed = -2;
 
 function draw() {
     
     ctx.drawImage(bg, 0, 0);
-    for(var i = 0; i < enemy.length; i++){
-    ctx.drawImage(enemy, enemy[i].x, enemy[i].y, 30, 30);
-    enemy[i].x--;
-    }
+    ctx.drawImage(enemy, xPos, yPos, 30, 30)
+    ctx.drawImage(mario, xUp, yUp, 15, 15);
     
-
-    ctx.drawImage(mario, xPos, yPos, 15, 15);
-    
-    yPos += grav;
+    xPos += speed;
     requestAnimationFrame(draw);
     
 }
 
 enemy.onload = draw;
-/
+
+
+
+
+
+
+
+
+
+
+
+//for(var i = 0; i < enemy.length; i++){
+    // ctx.drawImage(enemy, enemys[i].x, enemys[i].y, 30, 30);
+    // enemys[i].x--;
+
+    // if(enemys[i].x==125) {
+    //     enemys.push({
+    //         x:cvs.width,
+    //         y: 100
+    //     })
+    // }
+    // }
