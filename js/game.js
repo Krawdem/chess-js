@@ -19,38 +19,59 @@ document.addEventListener("keyup", down);
 
 function jump() {
     yUp =185;
-    xUp +=15;
+    ctx.drawImage(marioJump, 10, 210, 15, 15);
+    
 
 } 
 function down(){
-    yUp +=25;
-    xUp +=10;
+    yUp =210;
+   
 }
+
 
  var enemys =[];
 
 enemys[0] = {
     x: cvs.width,
-    y: 0
+    y: 0,
 }
-var xUp = 10;
+
+
+var xUp = 50;
 var yUp = 210;
 
+var gap = 204;
 
-var xPos = 150;
-var yPos = 204;
-var speed = -2;
 
 function draw() {
     
     ctx.drawImage(bg, 0, 0);
-    ctx.drawImage(enemy, xPos, yPos, 30, 30)
     ctx.drawImage(mario, xUp, yUp, 15, 15);
     
-    xPos += speed;
-    requestAnimationFrame(draw);
-    
+    for(var i = 0; i < enemys.length; i++) {
+        ctx.drawImage(enemy, enemys[i].x, enemys[i].y + gap, 30, 30);
+        
+        enemys[i].x--;
+        
+
+        if(enemys[i].x == 50){
+            enemys.push({
+            x : cvs.width,
+            y : 4 });
+            
+        }
+        if(xUp + enemys.width >= enemys[i].x
+            && xUp <= enemys[i].x 
+            && (yUp <= enemys.y || yUp + mario.width >= enemys[i].y )|| yUp + mario.width >= cvs.width)
+
+        requestAnimationFrame(draw, );
+    }  
+   
 }
+
+
+
+
 
 enemy.onload = draw;
 
@@ -64,14 +85,3 @@ enemy.onload = draw;
 
 
 
-//for(var i = 0; i < enemy.length; i++){
-    // ctx.drawImage(enemy, enemys[i].x, enemys[i].y, 30, 30);
-    // enemys[i].x--;
-
-    // if(enemys[i].x==125) {
-    //     enemys.push({
-    //         x:cvs.width,
-    //         y: 100
-    //     })
-    // }
-    // }
